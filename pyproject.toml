@@ -1,0 +1,2 @@
+[build-system]
+requires = ["mkdocs-material", "mkdocs-git-revision-date-localized-plugin"]

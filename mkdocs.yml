@@ -1,8 +1,10 @@
 site_name: lammps-tutorial
+repo_name: lammpscn
+repo_url: https://github.com/Roy-Kid/lammpscn2
 
 theme:
   name: material
-  language: zh-Hant
+  language: zh
   palette:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
@@ -20,5 +22,51 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
 
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - navigation.tabs
+    - navigation.prune
+    - navigation.footer
+    - navigation.indexes
+    - navigation.expand
+    - toc.follow
+    - toc.integrate
+    - content.action.edit
+
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil 
+    view: material/eye
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Roy-Kid/lammpscn2
+
 extra_css:
   - stylesheets/extra.css
+
+plugins:
+  git-reversion-data-localized:
+    - enable_create_data: true
+
+plugins:
+  - search
+  - git-authors
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - def_list
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+      title: On this page
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+
+copyright: Copyright &copy; 2019-2023 Roy Kid
