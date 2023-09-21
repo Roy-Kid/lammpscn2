@@ -58,7 +58,7 @@ lattice style scale keyword values ...
 
 `create_atoms`甚至支持采用[STL](https://en.wikipedia.org/wiki/STL_(file_format))格式的文件作为输入。在CAD软件中完成对网格的编辑，生成STL文件，然后通过`create_atoms`命令将网格导入到lammps中。这种方法在建模复杂的几何形状时非常有用，例如在模拟微流控芯片时，可以直接将芯片的几何形状导入到lammps中，而不需要手动输入每一个原子的坐标。
 
-在data文件中，我们会在文件头的部分指定原子、键、角的数量以及类型数量，之后lammps会在根据这些数量分配相应的内存。但是，当使用`create_atoms`新建原子时，lammps并不知道我们需要多少内存，更不知道此时模拟盒子的尺寸。因此需要我们通过`create_box`命令实现：，例如`create_box 1 box`将为类型为1的原子建立一个盒子。如果需要在盒子中添加其他类型的原子，
+在data文件中，我们会在文件头的部分指定原子、键、角的数量以及类型数量，之后lammps会在根据这些数量分配相应的内存。但是，当使用`create_atoms`新建原子时，lammps并不知道我们需要多少内存，更不知道此时模拟盒子的尺寸。因此需要我们通过`create_box`命令实现：
 
 ```
 create_box N region-ID keyword value ...
@@ -70,3 +70,58 @@ create_box N region-ID keyword value ...
 
 !!! tip RTFM
     更多`create_box`的用法和参数细节，请参考[手册](https://docs.lammps.org/create_box.html)
+
+除了需要手动指定原子类型的数量`N`之外，我们还需要指定键、角、二面角等的数量。当我们还需要添加分子时，我们需要额外指定`extra/bond/per/atom`等参数，lammps将根据这些参数为键接的原子分配额外的内存。例如，使用`create_box 1 box`可以满足晶体硅的模拟，但是如果我们需要继续添加水分子，则需要使用`create_box 2 box extra/bond/per/atom 2 extra/angle/per/atom 1`，其中`extra/bond/per/atom 2`表示每个原子需要额外分配2个键的内存，`extra/angle/per/atom 1`表示每个原子需要额外分配1个角的内存。当然，我们这里并不需要精确地设置这些数量，我们完全可以给一个足够大的数值。相对于模拟过程中的内存，这里的数量可以忽略不记。
+
+## 模板
+
+上一节中，我们知道可以直接使用`create_atoms`命令将原子放入体系，那么如何将分子放入体系呢？这就需要用到分子模板的功能。所谓`molecule template`实际上是与data文件很相近的文本文件，其中记录了一个分子的坐标、原子类型、电荷、拓扑连接等数据。这个文件将通过`molecule`命令读入，并赋予一个`molecule-ID`，之后可以在其他命令中引用。例如，`create_atoms 1 random 100 12345 mol h2o 123`将在体系中随机放入ID为`h2o`的分子，其中`123`同样也是随机数种子。
+
+!!! tip RTFM
+    更多`molecule`的用法和参数细节，请参考[手册](https://docs.lammps.org/molecule.html)
+
+例如，一个长得像水分子模板文件的格式如下：
+
+```
+# water molecule
+3 atoms
+2 bonds
+1 angles
+
+Coords
+
+1  0.000000  0.000000  0.000000
+2  0.957200  0.000000  0.000000
+3  0.000000  0.957200  0.000000
+
+Types
+
+1  1
+2  2
+3  2
+
+Charges
+
+1  -1.0
+2   0.5
+3   0.5
+
+Bonds
+
+1  1  1  2
+2  1  1  3
+
+Angles
+
+1  1  2  3  1  2
+```
+如果读取多个分子模板，我们需要手动处理type-id的问题。例如，如果我们读取了两个分子，第一个分子的type-id为1到2，第二个分子的type-id为1到4。这样的type-id是有重叠的，因此我们需要手动将type-id进行平移，使得type-id连续。这个过程可以通过`offset Toff Boff Aoff Doff Ioff`参数实现。例如，`molecule mol2 offset 2 2 2 2 2`将所有第二个分子的所有type-id都增加2。
+
+## 优化
+
+通过上述非物理的方法将分子塞入体系中所得到的结果是不可信的。使用这种结构直接进行分子动力学模拟通常会出现一系列的问题，例如原子重叠或者距离过远等。我们需要对体系进行优化。最常见的优化方法是`minimize`：
+
+``` bash
+
+
+```
