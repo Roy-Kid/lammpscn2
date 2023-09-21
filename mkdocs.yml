@@ -49,12 +49,9 @@ extra_css:
   - stylesheets/extra.css
 
 plugins:
-  git-reversion-data-localized:
-    - enable_create_data: true
-
-plugins:
   - search
   - git-authors
+  - git-revision-date-localized
 
 markdown_extensions:
   - abbr
