@@ -103,7 +103,9 @@ LAMMPS同时提供了通过ctypes到处的底层python接口和名为`pylammps`�
 cmake -C ../cmake/presets/basic.cmake -DLAMMPS_EXCEPTIONS=yes -DBUILD_LIB=yes -DBUILD_SHARED_LIBS=yes ../cmake
 ```
 
-可以通过修改presets下的预置文件来决定哪些包需要安装。更多的参数选择请[查看](https://github.com/lammps/lammps/blob/master/cmake/README.md)。待配置完成后会出现配置结果详情，如：
+`make`执行完成之后，务必使用`make install-python`命令安装python接口。
+
+可以通过修改`presets`下的预置文件来决定哪些包需要安装。更多的参数选择请[查看](https://github.com/lammps/lammps/blob/master/cmake/README.md)。待配置完成后会出现配置结果详情，如：
 
 ``` sh
 root@hpc-1043438:~/lammps/build# cmake -C ../cmake/presets/basic.cmake -DPKG_GPU=on -DGPU_API=cuda -DLAMMPS_EXCEPTIONS=yes -DBUILD_LIB=yes -DBUILD_SHARED_LIBS=yes ../cmake
@@ -156,7 +158,6 @@ make -j8
 make install
 ```
 编译与安装完成后，`build`文件夹下会有一个名为lmp的可执行文件，此文件为最终生成的二进制可执行文件。`lmp`/`lmp_mpi`/`lmp_serial`/`lmp_gpu`均代指此此文件。
-
 
 ::: tip
 本节教程定位到[手册](https://lammps.sandia.gov/doc/Packages_details.html#pkg-kokkos)和[安装详情](https://lammps.sandia.gov/doc/Build_extras.html#kokkos)两节。
