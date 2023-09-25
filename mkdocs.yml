@@ -52,6 +52,7 @@ plugins:
   - search
   - git-authors
   - git-revision-date-localized
+  - mkdocs-jupyter
 
 markdown_extensions:
   - abbr

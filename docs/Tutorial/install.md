@@ -9,7 +9,7 @@
 
 使用git命令从Github上拉取代码
 
-```
+``` sh
 git clone https://github.com/lammps/lammps.git 
 ```
 
@@ -100,19 +100,63 @@ cmake -C ../cmake/presets/basic.cmake -DPKG_GPU=on -DGPU_API=cuda -DGPU_ARCH=sm_
 LAMMPS同时提供了通过ctypes到处的底层python接口和名为`pylammps`的高级接口。如果需要启用这个功能，需要编译名为python的包：
 
 ``` sh
-cmake ../cmake -DPKG_MOLECULE=yes -DLAMMPS_EXCEPTIONS=yes -DBUILD_LIB=yes -DBUILD_SHARED_LIBS=yes ../cmake
-make
+cmake -C ../cmake/presets/basic.cmake -DLAMMPS_EXCEPTIONS=yes -DBUILD_LIB=yes -DBUILD_SHARED_LIBS=yes ../cmake
 ```
 
-可以通过修改presets下的预置文件来决定哪些包需要安装。更多的参数选择请[查看](https://github.com/lammps/lammps/blob/master/cmake/README.md)。待配置完成后会出现配置结果详情，确认后：
+可以通过修改presets下的预置文件来决定哪些包需要安装。更多的参数选择请[查看](https://github.com/lammps/lammps/blob/master/cmake/README.md)。待配置完成后会出现配置结果详情，如：
+
+``` sh
+root@hpc-1043438:~/lammps/build# cmake -C ../cmake/presets/basic.cmake -DPKG_GPU=on -DGPU_API=cuda -DLAMMPS_EXCEPTIONS=yes -DBUILD_LIB=yes -DBUILD_SHARED_LIBS=yes ../cmake
+loading initial cache file ../cmake/presets/basic.cmake
+...
+-- The following tools and libraries have been found and configured:
+ * Git
+ * Threads
+ * CUDA
+ * OpenMP
+ * Python
+ * Python3
+
+-- <<< Build configuration >>>
+   LAMMPS Version:   20230802 patch_2Aug2023-427-g75682ffbca
+   Operating System: Linux Ubuntu" 20.04
+   CMake Version:    3.16.3
+   Build type:       RelWithDebInfo
+   Install path:     /root/.local
+   Generator:        Unix Makefiles using /usr/bin/make
+-- Enabled packages: GPU;KSPACE;MANYBODY;MOLECULE;RIGID
+-- <<< Compilers and Flags: >>>
+-- C++ Compiler:     /usr/bin/c++
+      Type:          GNU
+      Version:       9.4.0
+      C++ Flags:     -O2 -g -DNDEBUG
+      Defines:       LAMMPS_SMALLBIG;LAMMPS_MEMALIGN=64;LAMMPS_OMP_COMPAT=4;LAMMPS_GZIP;FFT_KISS;LMP_GPU
+-- <<< Linker flags: >>>
+-- Executable name:  lmp
+-- Shared library flags:    
+-- <<< GPU package settings >>>
+-- GPU API:                  CUDA
+-- CUDA Compiler:            /usr/local/cuda/bin/nvcc
+-- GPU default architecture: sm_50
+-- GPU binning with CUDPP:   OFF
+-- CUDA MPS support:         OFF
+-- GPU precision:            MIXED
+-- <<< FFT settings >>>
+-- Primary FFT lib:  KISS
+-- Using double precision FFTs
+-- Using non-threaded FFTs
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /root/lammps/build
+```
+务必仔细阅读其中每一项以确保自动生成的配置正确。确认无误后开始编译：
+
 ```sh
-make 
+make -j8
 make install
 ```
-请注意，此时cmake 文件夹下会有一个名为lmp的可执行文件，此文件就是最终编译结果。如果您看这个名字不爽可以自行重命名，以后开始计算所调用命令就以新名称替换。教程以下均使用`lmp`/`lmp_mpi`/`lmp_serial`/`lmp_gpu`代指此文件。
+编译与安装完成后，`build`文件夹下会有一个名为lmp的可执行文件，此文件为最终生成的二进制可执行文件。`lmp`/`lmp_mpi`/`lmp_serial`/`lmp_gpu`均代指此此文件。
 
-
-## 使用kokkos加速
 
 ::: tip
 本节教程定位到[手册](https://lammps.sandia.gov/doc/Packages_details.html#pkg-kokkos)和[安装详情](https://lammps.sandia.gov/doc/Build_extras.html#kokkos)两节。
@@ -136,6 +180,7 @@ make install
 ```
 
 This wraps an nvcc, allowing it to be treated as a real C++ compiler with all the usual flags.
+
 
 ## 使用传统的Make安装
 
