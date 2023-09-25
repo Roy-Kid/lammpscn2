@@ -46,7 +46,7 @@ extra:
       link: https://github.com/Roy-Kid/lammpscn2
 
 extra_css:
-  - stylesheets/extra.css
+  - docs/stylesheets/extra.css
 
 plugins:
   - search

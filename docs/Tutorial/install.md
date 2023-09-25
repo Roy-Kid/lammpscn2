@@ -72,7 +72,7 @@ endforeach()
 ``` sh
 cmake -C ../cmake/presets/basic.cmake ../cmake 
 ```
-如果使lammps支持gpu加速，需要另行配置。系统需安装[Nvidia驱动]((https://www.nvidia.cn/Download/index.aspx?lang=cn))和[CUDA](https://developer.nvidia.com/cuda-downloads)，确保`nvidia-smi`和`nvcc -V`命令可以运行。
+如果使lammps支持gpu加速，需要另行配置。系统需安装[Nvidia驱动](https://www.nvidia.cn/Download/index.aspx?lang=cn)和[CUDA](https://developer.nvidia.com/cuda-downloads)，确保`nvidia-smi`和`nvcc -V`命令可以运行。
 
 请在`cmake`的时候加上以下参数: 
 ```

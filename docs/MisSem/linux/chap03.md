@@ -53,7 +53,7 @@ represents the file system tree as in Figure 1. Notice that the tree is
 usually shown upended, that is, with the root at the top and the various
 branches descending below.
 
-![](images/3.png) \\
+![](/public/assets/MisSem/linux/chap03.png) \\
 图1: 由图形化文件管理器显示的文件系统树
 {: .figure}
 

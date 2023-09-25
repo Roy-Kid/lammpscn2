@@ -458,7 +458,7 @@ Here we filter the stream with pr, using the -t option (omit headers and footers
 
 这里我们用带 -t 参数（忽略页眉和页脚）的 pr 命令过滤数据流，然后用 a2ps 指定一个输出文件（-o 参数），并设定每页66行（-L 参数）来匹配 pr 的输出分页。用合适的文件查看器查看我们的输出文件，我们就会看到图23-1中显示的结果。
 
-![](images/23-1.png) \\
+![](/public/MisSem/linux/chap23_0.png) \\
 图 23-1: 浏览 a2ps 的输出结果
 {: .figure}
 
