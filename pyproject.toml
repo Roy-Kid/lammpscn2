@@ -1,2 +1,11 @@
+[project]
+name = "lammpscn"
+authors = [
+    {name = "Roy Kid", email = "lijichen365@gmail.com"},
+]
+dynamic = ["version"]
+dependencies = ["mkdocs", "mkdocs-material", "mkdocs-git-revision-date-localized-plugin", "mkdocs-git-authors-plugin", "mkdocs-jupyter"]
+
 [build-system]
-requires = ["setuptools", "mkdocs", "mkdocs-material", "mkdocs-git-revision-date-localized-plugin", "mkdocs-git-authors-plugin", "mkdocs-jupyter"]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
