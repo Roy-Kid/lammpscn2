@@ -1,4 +1,7 @@
 # 自由能基础理论
+
+<span class='git-page-authors'><a href='mailto:jane@abc.com'>Jane Doe</a>
+
 ## 什么是自由能
 热力学观点 (恒温恒体积下)：
 
