@@ -1,0 +1,7 @@
+LICENSE
+pyproject.toml
+lammpscn.egg-info/PKG-INFO
+lammpscn.egg-info/SOURCES.txt
+lammpscn.egg-info/dependency_links.txt
+lammpscn.egg-info/requires.txt
+lammpscn.egg-info/top_level.txt

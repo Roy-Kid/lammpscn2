@@ -1,0 +1,8 @@
+.highlight .sb {
+    color: #0FF1CE;
+  }
+
+::selection {
+    background: #f56e07b6;
+    color: #000;
+  }
