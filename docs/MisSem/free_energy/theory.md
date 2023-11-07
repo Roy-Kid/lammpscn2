@@ -180,6 +180,50 @@ $$
 \omega_i(\xi)=K / 2\left(\xi(r)-\xi_i^{\mathrm{ref}}\right)^2
 $$
 
+加上偏置势之后的总势函数为：
+
+$$
+E^{\mathrm{b}}(r)=E^{\mathrm{u}}(r)+\omega_i(\xi)
+$$
+
+而我们知道，自由能是一个系统平衡态的性质，换句话说，自由能应该由系统的平衡势函数所决定，即：
+
+$$ 
+F_i (\xi) = - \frac{1}{\beta} \int \exp [-\beta E^{u}(r)] \delta\left[\xi(r)-\xi\right] d^{N}{r} =- \frac{1}{\beta} P_{i}^{\mathrm{u}}(\xi)
+$$
+
+其中 $P_{i}^{\mathrm{u}}(\xi)$ 为体系在平衡状态下关于集合变量$\xi(r)$的概率分布：
+
+$$
+P_{i}^{\mathrm{u}}(\xi)=\frac{\int \exp [-\beta E(r)] \delta\left[\xi(r)-\xi\right] d^{N}{r}}{\int \exp [-\beta E(r)] d^{N}{r}}
+$$
+
+另一方面，伞形采样中系统是在加了偏置势之后的总势函数$E^{\mathrm{b}}(r)$下演化的，在伞形采样中我们真正要问的问题其实是：如何利用在加了偏置势函数之后的轨迹中进行平衡自由能的计算。为了达到这一目的，我们来尝试利用偏置势函数来表达平衡的自由能。首先我们可以写出在偏置势函数下，体系关于集合变量$\xi(r)$的概率分布：
+
+$$ P_{i}^{\mathrm{b}}(\xi)=\frac{\int \exp \left\{-\beta\left[E(r)+\omega_{i}\left(\xi(r)\right)\right]\right\} \delta\left[\xi(r)-\xi\right] d^{N}{r}}{\int \exp \left\{-\beta\left[E(r)+\omega_{i}\left(\xi(r)\right)\right]\right\} d^{N}{r}} $$
+
+因此我们可以用偏置势下的概率分布来表达平衡态的概率分布：
+
+$$
+\begin{aligned}
+P_{i}^{\mathrm{u}}(\xi)=& P_{i}^{\mathrm{b}}(\xi) \exp \left[\beta \omega_{i}(\xi)\right] \\
+& \times \frac{\int \exp \left\{-\beta\left[E(r)+\omega_{i}(\xi(r))\right]\right\} d^{N}{r}}{\int \exp [-\beta E(r)] d^{N}{r}} \\
+=& P_{i}^{\mathrm{b}}(\xi) \exp \left[\beta \omega_{i}(\xi)\right] \\
+& \times \frac{\int \exp [-\beta E(r)] \exp \left\{-\beta \omega_{i}[\xi({r})]\right\} d^{N}{r}}{\int \exp [-\beta E(r)] d^{N}{r}} \\
+=& P_{i}^{\mathrm{b}}(\xi) \exp \left[\beta \omega_{i}(\xi)\right]\left\langle\exp \left[-\beta \omega_{i}(\xi)\right]\right\rangle
+\end{aligned}
+$$
+
+注意这里的期望值是在体系的平衡系综下的平均，这样一来体系真正的平衡自由能为：
+
+$$
+F_i (\xi) = - \frac{1}{\beta} P_{i}^{\mathrm{u}}(\xi) = -(1 / \beta) \ln P_{i}^{\mathrm{b}}(\xi)-\omega_{i}(\xi)+Q_{i}
+$$
+
+其中$Q_i = -(1 / \beta) \ln \left\langle\exp \left[-\beta \omega_{i}(\xi)\right]\right\rangle $. 这里我们注意到真正的平衡自由能有三项，其中第一项$-(1 / \beta) \ln P_{i}^{\mathrm{b}}(\xi)$可以直接从采样中得到，第二项$\omega_{i}(\xi)$是我们已知的偏置势函数的形式，只有第三项$Q_i$是不知道的, 从定义中我们可以看出$Q_i$实际上是取决于平衡态分布或者说平衡自由能本身的，因此通常这样的一个等式我们可以通过自洽迭代的方式计算得到。
+
+注意到，以上的讨论中我们只考虑了一个偏置势窗口下的自由能计算，也就是说我们只得到了窗口$i$下的自由能$F_i (\xi)$, 但我们真正关心的问题是对我们划分范围内的所有集合变量$\xi(r)$的可能取值，其对应自由能的相对大小，或者说整个区间的函数形式应该是什么样的。
+
 ## 非平衡态自由能计算方法
 
 
