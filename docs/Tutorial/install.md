@@ -39,14 +39,13 @@ make -j8 && make install
 !!! note "enable shared library"
     如果需要使用python接口，需要在编译时加入`--enable-shared=yes`参数。如果没有安装python接口, 或不编译lammps的shared lib，可以跳过这一步。
 
-安装并行框架[mpich](http://www.mpich.org/)或[OpenMPI](https://www.open-mpi.org/)
+安装并行框架[mpich](http://www.mpich.org/)或[OpenMPI](https://www.open-mpi.org/)，这里以mpich为例
 
 ``` sh
 wget https://www.mpich.org/static/downloads/4.1.2/mpich-4.1.2.tar.gz
 tar -zxvf mpich-4.1.2.tar.gz #解压缩
-./configure --enable-shared=yes #--enable-shared=yes是必不可少的参数；如果安装到其他路径，注意环境变量的问题。
-make
-make install
+./configure --enable-shared=yes #--enable-shared=yes必不可少；如果安装到其他路径，注意环境变量的问题。
+make -j8 && make install
 ```
 
 CMake支持源外编辑，因此我们可以在任意位置新建一个build文件夹作为编译工作区
