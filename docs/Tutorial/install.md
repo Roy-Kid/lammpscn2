@@ -36,6 +36,8 @@ cd fftw
 ./configure
 make -j8 && make install
 ```
+!!! note "enable shared library"
+    如果需要使用python接口，需要在编译时加入`--enable-shared=yes`参数。如果没有安装python接口, 或不编译lammps的shared lib，可以跳过这一步。
 
 安装并行框架[mpich](http://www.mpich.org/)或[OpenMPI](https://www.open-mpi.org/)
 
