@@ -169,3 +169,7 @@ poetry.toml
 
 # LSP config files
 pyrightconfig.json
+
+# lammps log files
+log.lammps
+*.dat
