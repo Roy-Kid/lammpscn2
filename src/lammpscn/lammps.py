@@ -62,8 +62,13 @@ class LammpsMagic(Magics):
         return self.lmp.last_thermo()
 
     @line_magic
-    def reset_box(self, line=None):
-        return self.lmp.reset_box()
+    def reset_box(self, line):
+        args = line.split()
+        assert len(args) == 9, "box dimension should be 6"
+        boxlo = list(map(float, args[:3]))
+        boxhi = list(map(float, args[3:6]))
+        xy, yz, xz = args[6:]
+        return self.lmp.reset_box(boxlo, boxhi, float(xy), float(yz), float(xz))
 
     @line_magic
     def extract_setting(self, line):
