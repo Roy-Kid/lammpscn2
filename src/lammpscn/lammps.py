@@ -16,7 +16,7 @@ class LammpsMagic(Magics):
         self.lmp = lammps()
 
     @line_cell_magic
-    def script(self, line, cell=None):
+    def lmp_script(self, line, cell=None):
         """
         register a magic command for IPython.
 
