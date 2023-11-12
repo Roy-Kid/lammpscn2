@@ -6,7 +6,6 @@ from IPython.core.magic import (
 )
 
 from lammps import lammps, IPyLammps, PyLammps
-import pprint
 
 
 @magics_class
@@ -37,10 +36,8 @@ class LammpsMagic(Magics):
         """
         if cell:
             self.lmp.commands_string(cell)
-            return pprint.PrettyPrinter(cell)
         else:
             self.lmp.command(line)
-            return line
 
     @line_magic
     def lmp(self, line=None):
@@ -57,7 +54,7 @@ class LammpsMagic(Magics):
     @line_magic
     def close(self):
         return self.lmp.close()
-
+    
 
 def load_ipython_extension(ipython):
     magics = LammpsMagic(ipython)
